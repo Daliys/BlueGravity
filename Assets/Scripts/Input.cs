@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+///  This class is responsible for handling input from the player but not player movement.
+/// </summary>
 public class Input : MonoBehaviour
 {
     public static event Action OnInventoryPressed;
@@ -8,10 +11,9 @@ public class Input : MonoBehaviour
 
     private bool _isInventoryOpen;
     
-    // Update is called once per frame
     void Update()
     {
-        if (UnityEngine.Input.GetButtonDown("Inventory")) // "Inventory" should match the name you set in the Input Manager
+        if (UnityEngine.Input.GetButtonDown("Inventory"))
         {
             if (_isInventoryOpen)
             {
@@ -28,6 +30,7 @@ public class Input : MonoBehaviour
         if(UnityEngine.Input.GetButtonDown("Cancel"))
         {
             OnCloseButtonPressed?.Invoke();
+            _isInventoryOpen = false;
         }
     }
 }
