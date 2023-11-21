@@ -9,4 +9,6 @@ public class CameraController : MonoBehaviour
     {
         transform.position = new Vector3(followingTarget.position.x, followingTarget.position.y, transform.position.z);
     }
+    
+    
 }
