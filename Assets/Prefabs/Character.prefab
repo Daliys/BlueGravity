@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 7274928069485004298}
   - component: {fileID: 7325680345629661042}
   - component: {fileID: 1432974721}
+  - component: {fileID: 1432974726}
   m_Layer: 6
   m_Name: Character
   m_TagString: Untagged
@@ -501,7 +502,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 605085e533cf04493a4a3620de96d4ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
+--- !u!114 &1432974726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275570648848826222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f96ea30c1f874cc3ab4117f1735005e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 7352871408702473894}
+  face: {fileID: 7352871410063864274}
+  hood: {fileID: 7352871411941320316}
+  leftWrist: {fileID: 7352871410783611956}
+  leftWeapon: {fileID: 7352871410426817808}
+  leftElbow: {fileID: 7352871411950119590}
+  leftShoulder: {fileID: 7352871412607964610}
+  rightWrist: {fileID: 7352871412801927354}
+  rightWeapon: {fileID: 7352871410998551824}
+  rightElbow: {fileID: 7352871411163921664}
+  rightShoulder: {fileID: 7352871412712388472}
+  torso: {fileID: 7352871408756209864}
+  leftBoot: {fileID: 7352871411481777098}
+  leftLeg: {fileID: 7352871412546336252}
+  rightBoot: {fileID: 7352871411713166918}
+  rightLeg: {fileID: 7352871412557257730}
+  pelvis: {fileID: 7352871410579796262}
 --- !u!1 &7275570648932744922
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +1024,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: ece48dca5e286fd48b5dc0633b08b15d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

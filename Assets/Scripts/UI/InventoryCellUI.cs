@@ -1,5 +1,6 @@
 using System;
 using Inventory;
+using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -34,7 +35,7 @@ namespace UI
             
             itemImage.color = Color.white;
             itemImage.sprite = itemEntry.Item.sprite;
-            itemCountText.text = itemEntry.Item.category == Category.Clothing ? "" : itemEntry.Count.ToString();
+            itemCountText.text = itemEntry.Item is ClothItem ? "" : itemEntry.Count.ToString();
         }
 
         public void OnPointerClick(PointerEventData eventData)
