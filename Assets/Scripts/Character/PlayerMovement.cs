@@ -1,79 +1,94 @@
+using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
+namespace Character
 {
-    [SerializeField] private float speed = 15.0f;
-    
-    private static readonly int Speed = Animator.StringToHash("Speed");
-    
-    private Animator _animator;
-    private Rigidbody2D _rigidbody;
-    private bool _isAllowPlayerInput = true;
-    private Vector3 _scale;
-    
-    void Start()
+    public class PlayerMovement : MonoBehaviour
     {
-        _animator = GetComponent<Animator>();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _scale = transform.localScale;
-    }
-
+        [SerializeField] private float speed = 15.0f;
+        [FormerlySerializedAs("healthManager")] [SerializeField] private PlayerHealthManager playerHealthManager;
     
-    void Update()
-    {
-        if(!_isAllowPlayerInput) return;
-
-        Vector2 playerInput = GetPlayerInput();
-        MovePlayer(playerInput);
-        FlipPlayerSprite(playerInput.x);
-        SetPlayerAnimationSpeed();
-    }
-
-    private Vector2 GetPlayerInput()
-    {
-        float horizontalInput = UnityEngine.Input.GetAxis("Horizontal");
-        float verticalInput = UnityEngine.Input.GetAxis("Vertical");
-
-        if(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput) > 1)
+        private static readonly int Speed = Animator.StringToHash("Speed");
+    
+        private Animator _animator;
+        private Rigidbody2D _rigidbody;
+        private bool _isAllowPlayerInput = true;
+        private Vector3 _scale;
+    
+        void Start()
         {
-            horizontalInput *= 0.75f;
-            verticalInput *= 0.75f;
+            _animator = GetComponent<Animator>();
+            _rigidbody = GetComponent<Rigidbody2D>();
+            _scale = transform.localScale;
         }
 
-        return new Vector2(horizontalInput, verticalInput);
-    }
-
-    private void MovePlayer(Vector2 playerInput)
-    {
-        _rigidbody.velocity = playerInput * speed;
-    }
-
-    private void FlipPlayerSprite(float horizontalInput)
-    {
-        if (horizontalInput != 0)
+    
+        void Update()
         {
-            transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * _scale.x, _scale.y, _scale.z);
+            if(!_isAllowPlayerInput) return;
+            if(playerHealthManager.IsDead) return;
+
+            Vector2 playerInput = GetPlayerInput();
+            MovePlayer(playerInput);
+            FlipPlayerSprite(playerInput.x);
+            SetPlayerAnimationSpeed();
         }
-    }
 
-    private void SetPlayerAnimationSpeed()
-    {
-        _animator.SetFloat(Speed, _rigidbody.velocity.magnitude / speed);
-    }
-
-
-    private void OnEnable()
-    {
-        PlayerInput.OnInventoryPressed += () =>
+        private Vector2 GetPlayerInput()
         {
-            _isAllowPlayerInput = false;
-            _animator.SetFloat(Speed, 0);
-            transform.localScale = _scale;
-        };
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+
+            if(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput) > 1)
+            {
+                horizontalInput *= 0.75f;
+                verticalInput *= 0.75f;
+            }
+
+            return new Vector2(horizontalInput, verticalInput);
+        }
+
+        private void MovePlayer(Vector2 playerInput)
+        {
+            _rigidbody.velocity = playerInput * speed;
+        }
+
+        private void FlipPlayerSprite(float horizontalInput)
+        {
+            if (horizontalInput != 0)
+            {
+                transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * _scale.x, _scale.y, _scale.z);
+            }
+        }
+
+        private void SetPlayerAnimationSpeed()
+        {
+            _animator.SetFloat(Speed, _rigidbody.velocity.magnitude / speed);
+        }
+
         
-        PlayerInput.OnCloseButtonPressed += () =>
+        /// <summary>
+        ///  This method is responsible for blocking player input when the game is paused.
+        /// </summary>
+        private void SetIsAllowPlayerInput(bool isPause)
         {
-            _isAllowPlayerInput = true;
-        };
+            if (isPause)
+            {
+                _isAllowPlayerInput = false;
+                _rigidbody.velocity = Vector2.zero;
+                _animator.SetFloat(Speed, 0);
+                transform.localScale = _scale;
+            }
+            else
+            {
+                _isAllowPlayerInput = true;
+            }
+        }
+
+        private void OnEnable()
+        {
+          GameUI.OnGamePaused += SetIsAllowPlayerInput;
+        }
     }
 }

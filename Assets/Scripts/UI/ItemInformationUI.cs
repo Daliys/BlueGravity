@@ -1,5 +1,5 @@
-using Inventory;
 using TMPro;
+using UI.InventoryCell;
 using UnityEngine;
 
 namespace UI
@@ -11,9 +11,9 @@ namespace UI
         [SerializeField] private TMP_Text itemPriceText;
         [SerializeField] private GameObject coinImage;
 
-        private void OnItemClickedHandler(GameObject sender, ItemEntry item)
+        private void OnItemClickedHandler(ClickCellInformation clickCellInformation)
         {
-            if (item == null)
+            if (clickCellInformation?.ItemEntry == null)
             {
                 itemNameText.text = "";
                 itemDescriptionText.text = "";
@@ -22,9 +22,9 @@ namespace UI
                 return;
             }
             
-            itemNameText.text = item.Item.itemName;
-            itemDescriptionText.text = item.Item.description;
-            itemPriceText.text = item.Item.price.ToString();
+            itemNameText.text = clickCellInformation.ItemEntry.Item.itemName;
+            itemDescriptionText.text = clickCellInformation.ItemEntry .Item.description;
+            itemPriceText.text = clickCellInformation.ItemEntry.Item.sellPrice.ToString();
             coinImage.SetActive(true);
             
         }
@@ -32,7 +32,7 @@ namespace UI
         private void OnEnable()
         {
             InventoryCellUI.OnItemClicked += OnItemClickedHandler;
-            OnItemClickedHandler(null, null);
+            OnItemClickedHandler(null);
         }
         private void OnDisable()
         {

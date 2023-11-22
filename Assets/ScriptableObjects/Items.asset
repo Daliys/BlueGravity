@@ -18,35 +18,40 @@ MonoBehaviour:
     description: Cloaked in midnight hues and adorned with ethereal markings, this
       skin embodies the stealthy assassins of the shadow realm. The character moves
       with elusive grace, wielding a blade suffused with the darkness of the void.
-    price: 40
+    buyPrice: 50
+    sellPrice: 45
     skinId: 0
   - itemName: Elemental Conjurer
     sprite: {fileID: 21300000, guid: 159d84b11a39348beae05e166958b64b, type: 3}
     description: Adorned in elemental attire, this skin embodies the elemental mages
       of fire, water, air, and earth. The character's clothing flickers with elemental
       energy, and their blade resonates with the essence of the natural world.
-    price: 50
+    buyPrice: 62
+    sellPrice: 54
     skinId: 1
   - itemName: Divine Crusader
     sprite: {fileID: 21300000, guid: 3e1dee2b8bf6448f4a7eab4dfe21a606, type: 3}
     description: Clad in resplendent golden armor emblazoned with sacred sigils,
       this skin embodies the holy warriors of divine justice. The character wields
       a radiant blade that pulses with the purest light
-    price: 46
+    buyPrice: 70
+    sellPrice: 63
     skinId: 2
   - itemName: Arcane Enchanter
     sprite: {fileID: 21300000, guid: 4ab05f0b7fbfe4cbda3bdb766e9564b9, type: 3}
     description: Draped in vibrant, swirling robes of cosmic colors, this skin represents
       the master enchanters of arcane arts. The character wields a blade adorned
       with arcane runes, crackling with raw magical power
-    price: 48
+    buyPrice: 66
+    sellPrice: 60
     skinId: 3
   - itemName: Mystic Guardian
     sprite: {fileID: 21300000, guid: 8734e67aeb63e441f9e42075f34cb824, type: 3}
     description: Clad in shimmering azure robes embroidered with ancient symbols,
       this skin embodies the mystical protectors of the realm. A flowing cloak of
       stars trails behind, while the enchanted blade gleams with celestial energy
-    price: 54
+    buyPrice: 58
+    sellPrice: 52
     skinId: 4
   - itemName: Timeless Sorcerer
     sprite: {fileID: 21300000, guid: 57f70e3533cf1463992fdcf2fef0253e, type: 3}
@@ -54,5 +59,6 @@ MonoBehaviour:
       fabric of time, this skin represents the sorcerers who manipulate time itself.
       The character's blade resonates with temporal energy, shimmering with glimpses
       of past and future
-    price: 60
+    buyPrice: 80
+    sellPrice: 70
     skinId: 5

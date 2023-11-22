@@ -55,13 +55,16 @@ namespace Inventory
                 OnInventoryChanged?.Invoke(_items);
             }
         }
-        
+
+
+        public List<ItemEntry> GetItems()
+        {
+            return _items;
+        }
+
+        public void UseItem(Item itemEntryItem)
+        {
+            
+        }
     }
-    
-    public class ItemEntry
-    {
-        public Item Item;
-        public int Count;
-    }
-    
 }

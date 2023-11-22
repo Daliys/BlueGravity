@@ -1,4 +1,5 @@
 using System;
+using UI;
 using UnityEngine;
 
 /// <summary>
@@ -11,13 +12,13 @@ public class PlayerInput : MonoBehaviour
     public static event Action OnInteractPressed;
 
 
-    private bool _isInventoryOpen;
+    private bool _isAnyUIAttach;
 
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown("Inventory"))
         {
-            if (_isInventoryOpen)
+            if (_isAnyUIAttach)
             {
                 OnCloseButtonPressed?.Invoke();
             }
@@ -25,18 +26,35 @@ public class PlayerInput : MonoBehaviour
             {
                 OnInventoryPressed?.Invoke();
             }
-
-            _isInventoryOpen = !_isInventoryOpen;
+            
         }
         else if (Input.GetButtonDown("Cancel"))
         {
             OnCloseButtonPressed?.Invoke();
-            _isInventoryOpen = false;
         }
         else if (Input.GetButtonDown("Interact"))
         {
+            if(_isAnyUIAttach) return;
+            
             OnInteractPressed?.Invoke();
 
         }
     }
+
+    private void OnEnable()
+    {
+        GameUI.OnGamePaused += SetIsAnyUIAttach;
+    }
+
+    private void SetIsAnyUIAttach(bool isPause)
+    {
+        // If the game is paused, then the player cannot interact with the UI.
+        _isAnyUIAttach = isPause;
+    }
+
+    private void OnDisable()
+    {
+        GameUI.OnGamePaused -= SetIsAnyUIAttach;
+    }
+
 }
