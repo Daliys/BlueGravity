@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Character;
 using Items;
 using UnityEngine;
 
@@ -15,10 +16,12 @@ namespace Inventory
         private readonly List<ItemEntry> _items = new();
         private const int MaxItems = 12;
 
+        private GameObject _player;
 
         private void Start()
         {
             OnInventoryChanged?.Invoke(_items);
+            _player = GameObject.FindGameObjectWithTag("Player");
         }
 
         public void AddItem(Item item)
@@ -64,7 +67,13 @@ namespace Inventory
 
         public void UseItem(Item itemEntryItem)
         {
+            if (_player == null) return;
             
+            if (itemEntryItem is ClothItem item)
+            {
+                _player.GetComponent<SkinChanger>().ChangeSkin(item.skinId);
+            }
+            RemoveItem(itemEntryItem);
         }
     }
 }

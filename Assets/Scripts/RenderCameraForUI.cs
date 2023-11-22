@@ -1,8 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+///  This class is used to render in texture character models on the screen (It is used to display the inventory).
+/// </summary>
 public class RenderCameraForUI : MonoBehaviour
 {
-    
     [SerializeField] private Transform followingTarget;
     [SerializeField] private Camera camera;
     private Vector3 _offset;

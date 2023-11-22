@@ -4,15 +4,15 @@ namespace InteractableObj
 {
     public abstract class Interactable : MonoBehaviour
     {
-        protected GameObject Player;
+        protected GameObject InteractableGameObject;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
+                InteractableGameObject = other.gameObject;
                 ActionEvent.ChangeHintText(GetHintTextOnCollide());
                 PlayerInput.OnInteractPressed += Interact;
-                Player = other.gameObject;
             }
         }
 
@@ -22,14 +22,14 @@ namespace InteractableObj
             {
                 ActionEvent.ChangeHintText("");
                 PlayerInput.OnInteractPressed -= Interact;
-                Player = null;
+                InteractableGameObject = null;
             }
         }
 
         private void OnDisable()
         {
             PlayerInput.OnInteractPressed -= Interact;
-            Player = null;
+            InteractableGameObject = null;
             
         }
 

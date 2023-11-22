@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using Inventory;
+using TMPro;
 using UI.InventoryCell;
 using UnityEngine;
 
@@ -10,6 +9,7 @@ namespace UI
     /// </summary>
     public class PlayerInventoryUI : AbstractPlayerInventory
     {
+        [SerializeField] private TMP_Text playerName;
         [SerializeField] protected GameObject deleteButton;
         [SerializeField] protected GameObject useButton;
       
@@ -56,6 +56,7 @@ namespace UI
             base.OnEnable();
             deleteButton.SetActive(false);
             useButton.SetActive(false);
+            playerName.text = Game.Instance.GetPlayerName();
         }
     }
 }

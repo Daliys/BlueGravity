@@ -3,13 +3,23 @@ using UnityEngine;
 
 namespace Character
 {
+    /// <summary>
+    ///  This class for managing the health of the player.
+    /// </summary>
     public class PlayerHealthManager : MonoBehaviour
     {
         public static event Action<int> OnHealthChanged;
+        public static event Action OnTakeDamage;
 
         private const int MaxHealth = 3;
         private int _currentHealth;
         public bool IsDead { get; set; }
+
+        private void Start()
+        {
+            _currentHealth = MaxHealth;
+            OnHealthChanged?.Invoke(_currentHealth);
+        }
 
         public void TakeDamage(int damage)
         {
@@ -19,6 +29,7 @@ namespace Character
             {
                 IsDead = true;
             }
+            OnTakeDamage?.Invoke();
         }
         
         public void Heal(int healAmount)

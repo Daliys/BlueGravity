@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 /// <summary>
-///  Class for storing game data. But for now, it only stores the number of coins. 
+///  Class for storing game data. But for now, it only stores the number of coins and playerName. 
 /// </summary>
 public class Game : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class Game : MonoBehaviour
     public static Game Instance { get; private set; }
     
     [SerializeField] private int coins;
+    [SerializeField] private string playerName;
     
     private void Awake()
     {
@@ -47,5 +47,7 @@ public class Game : MonoBehaviour
     {
         return coins >= coin;
     }
+    
+    public string GetPlayerName() => playerName;
 
 }

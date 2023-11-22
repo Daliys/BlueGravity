@@ -1,3 +1,4 @@
+using Character;
 using UnityEngine;
 
 namespace InteractableObj
@@ -29,13 +30,18 @@ namespace InteractableObj
 
         private void TeleportPlayer()
         {
-            Player.transform.position = linkedPentagon.transform.position;
+            InteractableGameObject.transform.position = linkedPentagon.transform.position;
         }
 
         private void Activate()
         {
             _isActivated = true;
             spriteRenderer.sprite = activated;
+            
+            if (InteractableGameObject)
+            {
+                InteractableGameObject.GetComponent<PlayerHealthManager>()?.TakeDamage(1);
+            }
         }
         
         protected override string GetHintTextOnCollide()
