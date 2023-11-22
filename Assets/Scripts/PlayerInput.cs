@@ -4,16 +4,18 @@ using UnityEngine;
 /// <summary>
 ///  This class is responsible for handling input from the player but not player movement.
 /// </summary>
-public class Input : MonoBehaviour
+public class PlayerInput : MonoBehaviour
 {
     public static event Action OnInventoryPressed;
     public static event Action OnCloseButtonPressed;
+    public static event Action OnInteractPressed;
+
 
     private bool _isInventoryOpen;
-    
+
     void Update()
     {
-        if (UnityEngine.Input.GetButtonDown("Inventory"))
+        if (Input.GetButtonDown("Inventory"))
         {
             if (_isInventoryOpen)
             {
@@ -26,11 +28,15 @@ public class Input : MonoBehaviour
 
             _isInventoryOpen = !_isInventoryOpen;
         }
-        
-        if(UnityEngine.Input.GetButtonDown("Cancel"))
+        else if (Input.GetButtonDown("Cancel"))
         {
             OnCloseButtonPressed?.Invoke();
             _isInventoryOpen = false;
+        }
+        else if (Input.GetButtonDown("Interact"))
+        {
+            OnInteractPressed?.Invoke();
+
         }
     }
 }

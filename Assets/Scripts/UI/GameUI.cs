@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace UI
@@ -5,7 +6,8 @@ namespace UI
     public class GameUI : MonoBehaviour
     {
         [SerializeField] private GameObject inventoryPanel;
-    
+        [SerializeField] private TMP_Text hintText;
+      
         private void OpenInventoryPanel()
         {
             inventoryPanel.SetActive(true);
@@ -18,14 +20,15 @@ namespace UI
 
         private void OnEnable()
         {
-            Input.OnInventoryPressed += OpenInventoryPanel;
-            Input.OnCloseButtonPressed += CloseInventoryPanel;
+            PlayerInput.OnInventoryPressed += OpenInventoryPanel;
+            PlayerInput.OnCloseButtonPressed += CloseInventoryPanel;
+            ActionEvent.OnHintTextChanged += (text) => hintText.text = text;
         }
     
         private void OnDisable()
         {
-            Input.OnInventoryPressed -= OpenInventoryPanel;
-            Input.OnCloseButtonPressed -= CloseInventoryPanel;
+            PlayerInput.OnInventoryPressed -= OpenInventoryPanel;
+            PlayerInput.OnCloseButtonPressed -= CloseInventoryPanel;
         }
     }
 }

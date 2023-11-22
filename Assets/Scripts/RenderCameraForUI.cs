@@ -26,14 +26,14 @@ public class RenderCameraForUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Input.OnInventoryPressed += EnableCamera;
-        Input.OnCloseButtonPressed += DisableCamera;
+        PlayerInput.OnInventoryPressed += EnableCamera;
+        PlayerInput.OnCloseButtonPressed += DisableCamera;
     }
     
     private void OnDisable()
     {
-        Input.OnInventoryPressed -= EnableCamera;
-        Input.OnCloseButtonPressed -= DisableCamera;
+        PlayerInput.OnInventoryPressed -= EnableCamera;
+        PlayerInput.OnCloseButtonPressed -= DisableCamera;
         DisableCamera();
     }
 }
